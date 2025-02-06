@@ -33,21 +33,21 @@
     $createdAt = filterInput(date('Y-m-d H:i:s'));
     $updatedAt = filterInput(date('Y-m-d H:i:s'));
 
-    //Save APD New
-    if($_GET['action'] == 'save-data-new-apd'){
+    //Save Coveralls
+    if($_GET['action'] == 'save-data-new-coveralls'){
 
         //Jika Submit
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            $code = filterInput($_POST['code']);
             $name = filterInput($_POST['name']);
-            $category = filterInput($_POST['category']);
+            $merk = filterInput($_POST['merk']);
+            $type = filterInput($_POST['type']);
+            $size = filterInput($_POST['size']);
+            $stock = filterInput($_POST['stock']);
             $location = filterInput($_POST['location']);
             $rackCode = filterInput($_POST['rack-code']);
             $rackNum = filterInput($_POST['rack-num']);
-            $stock = filterInput($_POST['stock']);
-            $expired = filterInput($_POST['expired']);
-
+           
             //Get File Upload
             $f1 = $_FILES['f1']['tmp_name'];
             $f1_name = $_FILES['f1']['name'];
@@ -56,39 +56,30 @@
             $format = pathinfo($f1_name, PATHINFO_EXTENSION);
 
             //Cek Required Form
-            if(empty($code) || empty($name) || empty($category) || empty($expired) || empty($location) || empty($rackCode) || empty($rackNum) || empty($stock)){
+            if(empty($name) || empty($merk) || empty($type) || empty($size) || empty($location) || empty($rackCode) || empty($rackNum) || empty($stock)){
                 $_SESSION['status'] = "error";
                 $_SESSION['msg'] = "Form is required !";
 
                 header('location:'.BASEURL.'/add-apd');
             }
             else {
-                if($cekData->cekDataFr('_tb_item_apd','_kode_apd', $code) < 1){
+                $fileName = ($f1 != null) ? date('YmdHis').'.'.$format : "-";
 
-                    $fileName = ($f1 != null) ? $code.'.'.$format : "-";
-
-                    if($fileName != "-"){
-                        move_uploaded_file($f1,'../uploads/foto/'.$fileName);
-                    }
-
-                    $saveData->saveDataAPD($code, $name, $category, $location, $rackCode, $rackNum, $stock, $expired, $fileName, $createdAt, $updatedAt);
-
-                    $_SESSION['status'] = "success";
-                    $_SESSION['msg'] = "Data has been saved";
-
-                    header('location:'.BASEURL.'/add-apd');
+                if($fileName != "-"){
+                    move_uploaded_file($f1,'../uploads/coveralls/'.$fileName);
                 }
-                else { 
-                    $_SESSION['status'] = "error";
-                    $_SESSION['msg'] = "Duplicat code APD !";
-    
-                    header('location:'.BASEURL.'/add-apd');
-                }
+
+                $saveData->saveDataCoveralls($name, strtoupper($merk), $type, $size, $stock, $location, $rackCode, $rackNum, $fileName, $createdAt, $updatedAt);
+
+                $_SESSION['status'] = "success";
+                $_SESSION['msg'] = "Data has been saved";
+
+                header('location:'.BASEURL.'/add-coveralls');
             }
 
         }
         else {
-            header('location:'.BASEURL.'/list-apd');
+            header('location:'.BASEURL.'/list-coveralls');
         }
     }
 
