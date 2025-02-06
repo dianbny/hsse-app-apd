@@ -13,10 +13,15 @@ RewriteRule ^save-new-user$ process/save_data_new_user.php?action=save-new-user 
 RewriteRule ^login-administrator$ pages/login-administrator/index.php [L]
 RewriteRule ^cek-login-admin$ process/cek_login_admin.php?action=cek-login-admin [L]
 RewriteRule ^dashboard-administrator$ pages/administrator/index.php?page=dashboard-administrator [L]
-RewriteRule ^list-apd$ pages/administrator/index.php?page=list-apd [L]
-RewriteRule ^add-apd$ pages/administrator/index.php?page=add-apd [L]
-RewriteRule ^save-data-new-apd$ process/save_data_for_admin.php?action=save-data-new-apd [L]
-RewriteRule ^detail-apd/([0-9]+)/?$ pages/administrator/index.php?page=detail-apd&id=$1 [L]
+
+RewriteRule ^list-coveralls$ pages/administrator/index.php?page=list-coveralls [L]
+RewriteRule ^add-coveralls$ pages/administrator/index.php?page=add-coveralls [L]
+RewriteRule ^save-data-new-coveralls$ process/save_data_for_admin.php?action=save-data-new-coveralls [L]
+RewriteRule ^detail-coveralls/([0-9]+)/?$ pages/administrator/index.php?page=detail-coveralls&id=$1 [L]
+
+RewriteRule ^list-safety-shoes$ pages/administrator/index.php?page=list-safety-shoes [L]
+
+
 
 RewriteRule ^logout$ process/logout.php [L]
 
