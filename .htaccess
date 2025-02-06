@@ -1,0 +1,22 @@
+Options -Indexes
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^landing-page$ pages/index.php [L]
+
+RewriteRule ^login$ pages/login/index.php [L]
+RewriteRule ^registrasi$ pages/registrasi/index.php [L]
+RewriteRule ^save-new-user$ process/save_data_new_user.php?action=save-new-user [L]
+
+RewriteRule ^login-administrator$ pages/login-administrator/index.php [L]
+RewriteRule ^cek-login-admin$ process/cek_login_admin.php?action=cek-login-admin [L]
+RewriteRule ^dashboard-administrator$ pages/administrator/index.php?page=dashboard-administrator [L]
+RewriteRule ^list-apd$ pages/administrator/index.php?page=list-apd [L]
+RewriteRule ^add-apd$ pages/administrator/index.php?page=add-apd [L]
+RewriteRule ^save-data-new-apd$ process/save_data_for_admin.php?action=save-data-new-apd [L]
+RewriteRule ^detail-apd/([0-9]+)/?$ pages/administrator/index.php?page=detail-apd&id=$1 [L]
+
+RewriteRule ^logout$ process/logout.php [L]
+
