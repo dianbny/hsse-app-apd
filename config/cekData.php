@@ -16,7 +16,7 @@
 
         //Cek Data 0 Clause
         public function cekDataAll($tabel){
-            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel");
+            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel WHERE _deleted_at IS NULL");
 			$cekJumlah = mysqli_num_rows($cekData);
 			
 			return $cekJumlah;
@@ -24,7 +24,7 @@
 
         //Cek Data 1 Clause
         public function cekDataFr($tabel, $colfr, $datafr){
-            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel WHERE $colfr = '$datafr'");
+            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel WHERE $colfr = '$datafr' AND _deleted_at IS NULL");
 			$cekJumlah = mysqli_num_rows($cekData);
 			
 			return $cekJumlah;
@@ -32,7 +32,7 @@
 
         //Cek Data 2 Clause
         public function cekDataSc($tabel, $colfr, $colsc, $datafr, $datasc){
-            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel WHERE $colfr = '$datafr' AND $colsc = '$datasc'");
+            $cekData = mysqli_query($this->koneksi,"SELECT * FROM $tabel WHERE $colfr = '$datafr' AND $colsc = '$datasc' AND _deleted_at IS NULL");
 			$cekJumlah = mysqli_num_rows($cekData);
 			
 			return $cekJumlah;
