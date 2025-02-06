@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     require_once "../../config/const.php";
 
@@ -22,41 +23,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= BASEURL; ?>/assets/css/style_page.css">
     <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/assets/vendors/font-awesome/css/font-awesome.css" />
-    <title>Dashboard</title>
+    <title>HSSE Bunyu Field</title>
 </head>
 <body>
-   <header>
-        
+
+    <!-- Header -->
+    <header>
+        <span style="font-size:26px;cursor:pointer;color:black;" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>&nbsp;&nbsp;
+        <img src="<?= BASEURL; ?>/assets/img/pertamina.png">
+        <span class="title-logo">PERTAMINA <span style="color:red;">EP</span></span>
         <div class="right">
-            <span><?= $_SESSION['username']; ?></span>
-            <a href="<?= BASEURL; ?>/logout">Log out</a>
+            <span><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;<?= $_SESSION['username']; ?></span>
+            <a href="<?= BASEURL; ?>/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Logout</a>
         </div>
-   </header>
-   <div class="jumbotron">
-        
-   </div>
-   <div class="container">
+    </header>
+
+    <div id="mySidenav" class="sidenav">
+        <button class="closebtn" onclick="closeNav()"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+
+        <a href="<?= BASEURL; ?>/dashboard-administrator"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Dashboard</a>
+        <a href="javascript:void(0)" id="first"><i class="fa fa-list" aria-hidden="true"></i>&nbsp; List APD</a>
+            <div class="menu-first">
+                <?php
+                    if($cekData->cekDataAll('_tb_category_apd') > 0){
+                        foreach ($getData->getDataAll('_tb_category_apd','_id') as $row){ ?>
+                            <a href="<?= BASEURL.'/list-'.str_replace(' ', '-', strtolower($row['_category'])); ?>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp; <?= $row['_category']; ?></a>
+                 <?php  }
+                    }
+                ?>
+            </div>
+        <a href="<?= BASEURL; ?>/dashboard-administrator"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Request</a>
+    </div>
+
+    <div class="jumbotron"></div>
+    
+    <div class="container">
 
     <?php
 
         $page = addslashes($_GET['page']);
 
         switch($page){
-            case "list-apd":
+            case "list-coveralls":
 
-                include "list_apd.php";
+                include "list_apd_coveralls.php";
 
                 break;
 
-            case "add-apd":
+            case "list-safety-shoes":
 
-                include "add_apd.php";
+                include "list_apd_safety_shoes.php";
     
                 break;
 
-            case "detail-apd":
+            case "add-coveralls":
 
-                include "detail_apd.php";
+                include "add_apd_coveralls.php";
+    
+                break;
+
+            case "detail-coveralls":
+
+                include "detail_apd_coveralls.php";
         
                 break;
 
@@ -76,7 +104,15 @@
                                 <div>
                                     Stok
                                     <div class="total">
-                                        <?= $cekData->cekDataFr('_tb_item_apd','_category','1'); ?>
+                                        <?php
+                                            $totalCoveralls = $getData->getSumData('_tb_coveralls');
+                                            if($totalCoveralls['stok'] == ""){
+                                                echo "0";
+                                            }
+                                            else {
+                                                echo $totalCoveralls['stok'];
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <div>
@@ -193,23 +229,18 @@
    </div>
 
     <!-- Javascript JQuery -->
+    <script>
+        function openNav() {
+        document.getElementById("mySidenav").style.width = "210px";
+        }
+
+        function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    
-    <script type='text/javascript'>
-        $(document).ready(function(){
-            $(".tab div a").click(function(){
-                const id = $(this).data('id');
-                if(!$(this).hasClass('active')){
-                    $(".tab div a").removeClass('active');
-                    $(this).addClass('active');
-                    
-                    $('.tab-content').hide();
-                    $(`[data-content=${id}]`).show();
-                }
-            });
-        });
-    </script>
+    <script src="<?= BASEURL; ?>/assets/js/script.js"></script>
 
    
 </body>
