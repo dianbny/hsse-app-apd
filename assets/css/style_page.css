@@ -34,9 +34,25 @@ a {
 header {
   position: fixed;
   width: 100%;
-  height: 50px;
+  height: auto;
   background-color: #ffffff;
   z-index: 1;
+  padding: 8px;
+}
+header img {
+  position: absolute;
+  width: 35px;
+  height: 30px;
+  top: 8px;
+  left: 50px;
+}
+header .title-logo {
+  position: absolute;
+  top: 11px;
+  left: 90px;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 18px;
 }
 header .navbar {
   width: 550px;
@@ -66,7 +82,7 @@ header .navbar > div > a.active {
 }
 header .right {
   position: absolute;
-  top: 5px;
+  top: 4px;
   right: 10px;
   width: 250px;
   height: 40px;
@@ -74,8 +90,8 @@ header .right {
   justify-content: space-around;
   align-items: center;
 }
-.header .right > span {
-  font-size: 12px;
+header .right > span {
+  font-size: 14px;
 }
 header .right > a {
   display: inline-block;
@@ -83,6 +99,96 @@ header .right > a {
   border-radius: 10px;
   background-color: rgba(235, 31, 39, 1);
   color: #ffffff;
+  font-size: 12px;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  overflow-x: hidden;
+  transition: 0.1s;
+  padding-top: 35px;
+}
+
+.sidenav p {
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.sidenav p a {
+  color: black;
+}
+
+.sidenav img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90px;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.sidenav a {
+  padding: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  margin: 15px 0 10px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sidenav a i {
+  margin-right: 10px;
+  font-size: 13px;
+  margin-left: 20px;
+}
+
+.sidenav a:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-left: 5px solid rgba(235, 31, 39, 1);
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  color: black;
+  background-color: #ffffff;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: 0px;
+}
+.menu-first,
+.menu-second,
+.menu-third,
+.menu-fourth,
+.menu-fifth,
+.menu-sixth,
+.menu-seventh {
+  width: 100%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  display: none;
+  background-color: rgb(9, 9, 9);
+}
+.menu-first a i,
+.menu-second a i,
+.menu-third a i,
+.menu-fourth a i,
+.menu-fifth a i,
+.menu-sixth a i,
+.menu-seventh a i {
+  padding-left: 15px;
   font-size: 12px;
 }
 .jumbotron {
