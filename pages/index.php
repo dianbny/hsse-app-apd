@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= BASEURL; ?>/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/assets/vendors/font-awesome/css/font-awesome.css" />
     <title>HSSE Bunyu Field</title>
 </head>
 <body>
@@ -26,7 +27,7 @@
             <a href="">Contact Us</a>
         </div>
         <div class="link">
-            <a href="<?= BASEURL; ?>/login" class="btnLg">Login</a>
+            <a href="<?= BASEURL; ?>/login" class="btnLg"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Login</a>
         </div>
     </div>
 </header>
@@ -58,7 +59,15 @@
                     <div>
                         Stok
                         <div class="total">
-                            <?= $cekData->cekDataFr('_tb_item_apd','_category','1'); ?>
+                            <?php
+                                $totalCoveralls = $getData->getSumData('_tb_coveralls');
+                                if($totalCoveralls['stok'] == ""){
+                                    echo "0";
+                                }
+                                else {
+                                    echo $totalCoveralls['stok'];
+                                }
+                            ?>
                         </div>
                     </div>
                     <div>
